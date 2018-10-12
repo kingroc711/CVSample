@@ -1,5 +1,4 @@
 import cv2
-import numpy as np
 
 img = cv2.imread('./res/aero3.jpg')
 print("pixel (150, 120) G value", img.item(150, 120, 0))
