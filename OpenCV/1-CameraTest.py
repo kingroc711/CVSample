@@ -10,4 +10,5 @@ while success:
     cv2.imshow('Test camera', frame)
     success, frame = cameraCapture.read()
 
+cv2.destroyAllWindows()
 cameraCapture.release()
