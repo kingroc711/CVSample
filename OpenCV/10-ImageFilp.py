@@ -1,6 +1,5 @@
 import cv2
 
-
 img = cv2.imread('./res/mini.jpeg')
 imgH = cv2.flip(img, 1)
 imgV = cv2.flip(img, 0)
