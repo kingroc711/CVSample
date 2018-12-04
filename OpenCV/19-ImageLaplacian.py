@@ -7,10 +7,10 @@ laplacian = cv2.Laplacian(img, cv2.CV_64F)
 sobelx = cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize=3)
 sobely = cv2.Sobel(img, cv2.CV_64F, 0, 1, ksize=3)
 
-soblexy = sobelx + sobely
+sobleXplusY = sobelx + sobely
 
-titles = ['Original', 'Laplacian', 'SobelX', 'SobelY', 'SobelXY']
-imgs = [img, laplacian, sobelx, sobely, soblexy]
+titles = ['Original', 'Laplacian', 'SobelX', 'SobelY', 'sobleXplusY']
+imgs = [img, laplacian, sobelx, sobely, sobleXplusY]
 
 plt.figure(figsize = (10, 5))
 
