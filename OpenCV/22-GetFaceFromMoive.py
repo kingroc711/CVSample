@@ -1,6 +1,5 @@
 import cv2
 import os
-import numpy as np
 
 cameraCapture = cv2.VideoCapture('./res/test.mp4')
 
