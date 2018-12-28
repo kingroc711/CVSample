@@ -1,8 +1,5 @@
 import cv2
 import numpy as np
-import sys
-import time
-
 
 def display(im, bbox):
     n = len(bbox)
