@@ -1,7 +1,5 @@
 import cv2 as cv
 import numpy as np
-import math
-
 
 img = cv.imread('./res/pic1.png', cv.IMREAD_COLOR)
 img2 = img.copy()
