@@ -27,7 +27,6 @@ while success:
 
     success, frame = cameraCapture.read()
 
-cv2.destroyAllWindows()
 cameraCapture.release()
 videoWriterLeftUp.release()
 videoWriterLeftDown.release()
