@@ -43,6 +43,3 @@ imgOut[:, :, 2] = np.multiply(img[:, :, 2], circleOut[:, :, 0])
 circleOut[circleOut == 1] = 255
 imgOut[:, :, 3] = circleOut[:, :, 0]
 cv2.imwrite('./out/imgOut.png', imgOut)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
