@@ -1,6 +1,7 @@
 import cv2
 
-kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3,3))
+#生成一个矩形的核,MORPH_CROSS为十字形，MORPH_ELLIPSE为椭圆。
+kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3,3))
 img = cv2.imread('./res/jeep.jpeg')
 cv2.imshow('org', img)
 
