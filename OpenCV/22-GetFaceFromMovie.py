@@ -17,7 +17,7 @@ while success:
     if len(rects) > 0:
         for (x, y, w, h) in rects:
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 1)
-        cv2.imshow('Test camera', frame)
+    cv2.imshow('Test camera', frame)
 
 cv2.destroyAllWindows()
 cameraCapture.release()
