@@ -1,4 +1,4 @@
-file = './res/neutral.txt'
+file = './data/neutral.txt'
 
 names = ['drawings', 'hentai', 'neutral', 'porn', 'sexy']
 itemList = []
