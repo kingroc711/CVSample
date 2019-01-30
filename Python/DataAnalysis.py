@@ -1,5 +1,6 @@
 file = './data/neutral.txt'
 
+#这些是已知的分类
 names = ['drawings', 'hentai', 'neutral', 'porn', 'sexy']
 itemList = []
 
@@ -8,6 +9,7 @@ with open(file) as f:
 
     for line in f.readlines():
         line = line.strip('\n')
+        #每个以'.jpg'结尾的行，作为一个item的开始
         if line.endswith('.jpg'):
             if item != {}:
                 t = item.copy()
@@ -20,8 +22,10 @@ with open(file) as f:
                 key = splits[0].strip()
                 value = splits[3].strip(')')
                 item[key] = value
+    #将最后一item放入队列
     if item != {}:
         itemList.append(item)
+
 maxList = []
 itemNumber = len(itemList)
 for i in itemList:
@@ -32,5 +36,5 @@ for i in itemList:
     maxList.append(maxKey)
 
 for n in names:
-    print('%8s : %s' % (n, maxList.count(n)))
+    print('%8s : %f' % (n, 100*maxList.count(n)/itemNumber))
     #print(n + ' : ' + str(maxList.count(n)))
