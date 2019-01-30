@@ -36,5 +36,5 @@ for i in itemList:
     maxList.append(maxKey)
 
 for n in names:
-    print('%8s : %f' % (n, 100*maxList.count(n)/itemNumber))
+    print('%8s : %d' % (n, maxList.count(n)))
     #print(n + ' : ' + str(maxList.count(n)))
