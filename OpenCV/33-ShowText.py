@@ -10,6 +10,8 @@ cv2.putText(img, 'Hello World', (0,160),    cv2.FONT_HERSHEY_DUPLEX,        1,  
 cv2.putText(img, 'Hello World', (0,200),    cv2.FONT_HERSHEY_SIMPLEX,       1,       (0, 0, 0),       1)
 cv2.putText(img, 'Hello World', (0,240),    cv2.FONT_HERSHEY_TRIPLEX,       1,       (150, 0, 180),   1)
 
+
+
 cv2.imshow('imgHV', img)
 cv2.waitKey()
 cv2.destroyAllWindows()
