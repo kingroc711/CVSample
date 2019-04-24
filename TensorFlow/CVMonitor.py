@@ -40,7 +40,7 @@ class MonitorThread(Thread):
             success, frame = self.cameraCapture.read()
             fileFullName = 'pic/' + str(self.args) + '.jpg'
             cv2.imwrite(fileFullName, frame)
-            time.sleep(0.05)
+            time.sleep(0.1)
 
             #sock
             client = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
@@ -51,7 +51,7 @@ class MonitorThread(Thread):
             splitString = resultStr.split('\n')
             print('aaaaaaaaaaaaaaaaaaaaaaaaa : ' + splitString[0])
 
-            img = cv2.imread('pic/' + str(self.args) + '.jpg')
+            img = cv2.imread(fileFullName)
 
             img_w = (int)(windowWidth/3)
             img_h = (int)(windowHigh/3)
@@ -59,7 +59,14 @@ class MonitorThread(Thread):
             print(img_w, img_h)
 
             reSize = cv2.resize(img, (img_w, img_h), interpolation=cv2.INTER_CUBIC)
-            cv2.putText(reSize, splitString[0], (0, 60), cv2.FONT_HERSHEY_TRIPLEX, 1, (0, 0, 255), 1)
+            if(splitString[0].startswith('porn')):
+                cv2.putText(reSize, splitString[0], (30, 60), cv2.FONT_HERSHEY_TRIPLEX, 1, (0, 0, 255), 1)
+            elif(splitString[0].startswith('neutral')):
+                cv2.putText(reSize, splitString[0], (30, 60), cv2.FONT_HERSHEY_TRIPLEX, 1, (255, 0, 0), 1)
+            elif(splitString[0].startswith('sexy')):
+                cv2.putText(reSize, splitString[0], (30, 60), cv2.FONT_HERSHEY_TRIPLEX, 1, (0, 255, 255), 1)
+            else:
+                cv2.putText(reSize, splitString[0], (30, 60), cv2.FONT_HERSHEY_TRIPLEX, 1, (0, 255, 0), 1)
 
             board_x = (int)(self.args/3)
             board_y = self.args%3
@@ -76,7 +83,7 @@ randomByteArray = bytearray(os.urandom(windowWidth*windowHigh*3))
 flatNumpyArray = np.array(randomByteArray)
 bgrImage = flatNumpyArray.reshape(windowHigh, windowWidth, 3)
 
-for i in range(6):
+for i in range(9):
     t = MonitorThread(name='monitor', args=(i))
     t.start()
 
@@ -85,7 +92,7 @@ cv2.namedWindow('image', cv2.WINDOW_FULLSCREEN)
 while True:
     if cv2.waitKey(1) == 27:
         break
-    time.sleep(0.05)
+    time.sleep(0.1)
     cv2.imshow('image', bgrImage)
 
 threadStop = True
