@@ -2,6 +2,7 @@ import cv2
 import time
 import numpy as np
 import os
+import socket
 
 
 from threading import Thread
@@ -25,7 +26,6 @@ videoList = ['rtmp://localhost/vod/sample1.mp4',
 def getVideoURL(num):
     return videoList[num]
 
-
 class MonitorThread(Thread):
 
     def __init__(self, name, args):
@@ -38,8 +38,19 @@ class MonitorThread(Thread):
     def run(self):
         while threadStop is not True:
             success, frame = self.cameraCapture.read()
-            cv2.imwrite('pic/' + str(self.args) + '.jpg', frame)
+            fileFullName = 'pic/' + str(self.args) + '.jpg'
+            cv2.imwrite(fileFullName, frame)
             time.sleep(0.05)
+
+            #sock
+            client = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+            client.connect("/tmp/tfserver.sock")
+            client.send(bytes(fileFullName, 'utf-8'))
+            resultbyte = client.recv(1024)
+            resultStr = str(resultbyte, encoding="utf-8")
+            splitString = resultStr.split('\n')
+            print('aaaaaaaaaaaaaaaaaaaaaaaaa : ' + splitString[0])
+
             img = cv2.imread('pic/' + str(self.args) + '.jpg')
 
             img_w = (int)(windowWidth/3)
@@ -48,7 +59,7 @@ class MonitorThread(Thread):
             print(img_w, img_h)
 
             reSize = cv2.resize(img, (img_w, img_h), interpolation=cv2.INTER_CUBIC)
-            print(reSize.shape)
+            cv2.putText(reSize, splitString[0], (0, 60), cv2.FONT_HERSHEY_TRIPLEX, 1, (0, 0, 255), 1)
 
             board_x = (int)(self.args/3)
             board_y = self.args%3
@@ -65,14 +76,17 @@ randomByteArray = bytearray(os.urandom(windowWidth*windowHigh*3))
 flatNumpyArray = np.array(randomByteArray)
 bgrImage = flatNumpyArray.reshape(windowHigh, windowWidth, 3)
 
-for i in range(9):
+for i in range(6):
     t = MonitorThread(name='monitor', args=(i))
     t.start()
 
+cv2.namedWindow('image', cv2.WINDOW_FULLSCREEN)
+#cv2.setWindowProperty('image', cv2.)
 while True:
     if cv2.waitKey(1) == 27:
         break
-    time.sleep(0.01)
-    cv2.imshow('reSize1', bgrImage)
+    time.sleep(0.05)
+    cv2.imshow('image', bgrImage)
 
 threadStop = True
+cv2.destroyAllWindows()
