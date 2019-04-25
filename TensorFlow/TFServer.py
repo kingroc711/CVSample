@@ -32,6 +32,7 @@ with tf.gfile.FastGFile('./inception_model/output_graph.pb', 'rb') as f:
 with tf.Session() as sess:
     softmax_tensor = sess.graph.get_tensor_by_name('final_result:0')
     while True:
+        #这里等待接收用户的图片信息。
         connection, address = TFServer.accept()
         rec = connection.recv(1024)
         picPath = str(rec, encoding="utf-8")
@@ -48,6 +49,7 @@ with tf.Session() as sess:
             buf = ('%s (score = %.2f%%) \n' % (human_string, score*100))
             result = result + buf
         print(result)
+        #将打分结果返回给提交打分申请的客户端
         connection.send(bytes(result, 'utf-8'))
     connection.close()
 
