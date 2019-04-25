@@ -28,7 +28,8 @@ class UploadFileHandler(tornado.web.RequestHandler):
         return time_str
 
     def post(self):
-        upload_path = os.path.join(os.path.dirname(__file__) + '/static', str(self.request.remote_ip))  #文件的暂存路径
+        # 文件的暂存路径
+        upload_path = os.path.join(os.path.dirname(__file__) + '/static', str(self.request.remote_ip))
         if(os.path.exists(upload_path) == False):
             os.makedirs(upload_path)
 
@@ -41,6 +42,7 @@ class UploadFileHandler(tornado.web.RequestHandler):
         fileType = fileData['content_type']
         print(fileName)
         print(fileType)
+        #这里判断图片是否为jpeg格式的文件，将其他格式的图片进行了过滤。
         if (operator.eq(fileType, 'image/jpeg') == False):
             self.write('请上传JPEG格式的图片!')
             return
@@ -48,18 +50,24 @@ class UploadFileHandler(tornado.web.RequestHandler):
             fileNameTime = self.getFileName()
             fileName = fileNameTime + extFileName
             fileFullName = os.path.join(upload_path, fileName)
-            with open(fileFullName, 'wb') as up:  # 有些文件需要已二进制的形式存储，实际中可以更改
+            #将用户上传的图片进行本地化存储。
+            with open(fileFullName, 'wb') as up:
                  up.write(fileData['body'])
             #self.write('finished!')
+
+            #通过socket管道将图片路径传给Tensorflow服务器
             client = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
             client.connect("/tmp/tfserver.sock")
             client.send(bytes(fileFullName, 'utf-8'))
+
+            #接收Tensorflow服务的打分数据
             resultbyte = client.recv(1024)
             resultStr = str(resultbyte, encoding="utf-8")
 
             n = fileFullName.find(staticFilePath)
             imagePath = fileFullName[n:]
 
+            #将图片源文件和打分数据同时进行显示。
             htmlSource = '<!DOCTYPE html> ' \
                        + '<head> <meta charset="UTF-8"> </head> ' \
                        + '<body> ' \
