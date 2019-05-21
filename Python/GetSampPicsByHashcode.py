@@ -2,11 +2,12 @@ import os
 import hashlib
 
 DirList = [
-   '/home/king/PycharmProjects/nsfw_data_scrapper/raw_data/drawings',
-   '/home/king/PycharmProjects/nsfw_data_scrapper/raw_data/hentai',
-   '/home/king/PycharmProjects/nsfw_data_scrapper/raw_data/neutral',
-   '/home/king/PycharmProjects/nsfw_data_scrapper/raw_data/porn',
-    '/home/king/PycharmProjects/nsfw_data_scrapper/raw_data/sexy'
+    '/home/king/imageNet/nsfw_data_scrapper-master/data/test/neutral'
+   # '/home/king/PycharmProjects/nsfw_data_scrapper/raw_data/drawings',
+   # '/home/king/PycharmProjects/nsfw_data_scrapper/raw_data/hentai',
+   # '/home/king/PycharmProjects/nsfw_data_scrapper/raw_data/neutral',
+   # '/home/king/PycharmProjects/nsfw_data_scrapper/raw_data/porn',
+   #  '/home/king/PycharmProjects/nsfw_data_scrapper/raw_data/sexy'
 ]
 
 def getMD5(file, readLen = 1024*20):
