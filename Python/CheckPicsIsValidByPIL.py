@@ -1,12 +1,13 @@
 import os
+import shutil
 from PIL import Image
 
 DirList = [
     '/home/king/PycharmProjects/nsfw_data_scrapper/raw_data/drawings',
-    # '/home/king/PycharmProjects/nsfw_data_scrapper/raw_data/hentai',
-    # '/home/king/PycharmProjects/nsfw_data_scrapper/raw_data/neutral',
-    # '/home/king/PycharmProjects/nsfw_data_scrapper/raw_data/porn',
-    # '/home/king/PycharmProjects/nsfw_data_scrapper/raw_data/sexy'
+    '/home/king/PycharmProjects/nsfw_data_scrapper/raw_data/hentai',
+    '/home/king/PycharmProjects/nsfw_data_scrapper/raw_data/neutral',
+    '/home/king/PycharmProjects/nsfw_data_scrapper/raw_data/porn',
+     '/home/king/PycharmProjects/nsfw_data_scrapper/raw_data/sexy'
 ]
 
 
@@ -47,4 +48,7 @@ for path in DirList:
                 img = Image.open(pic_file)
                 img.load()
             except Exception as e:
+                #print(e)
                 print(pic_file)
+                #shutil.copy(pic_file, '/home/king/Desktop/')
+                #os.remove(pic_file)
