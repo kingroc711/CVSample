@@ -15,8 +15,9 @@ for path in DirList:
         if fullName.endswith('.png'):
             mainName, ext = os.path.splitext(fullName)
             print(fullName, mainName + '.jpeg')
-            im = Image.open(fullName)
+            im = Image.open(fullName).convert("RGBA")
             bg = Image.new('RGB', im.size, (255, 255, 255))
-            bg.paste(im, (0, 0), im)
+            x, y = im.size
+            bg.paste(im, (0, 0, x, y), im)
             bg.save(mainName + '.jpeg', quality=99)
             os.remove(fullName)
