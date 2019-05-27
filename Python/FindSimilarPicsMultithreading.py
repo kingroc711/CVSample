@@ -64,7 +64,7 @@ def main():
     print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
 
     keyList = list(histMap.keys())
-
+########################单线程部分########################
     for i in range(len(keyList)):
         for j in range(i + 1, len(keyList)):
             cmp = cv2.compareHist(histMap[keyList[i]], histMap[keyList[j]], cv2.HISTCMP_CHISQR_ALT)
@@ -74,7 +74,8 @@ def main():
                 if os.path.exists(keyList[j]):
                     pass#os.remove(keyList[j])
                 print(keyList[i], keyList[j])
-
+###################多线程部分####################
+############不知道为什么，多线程的效率没有单线程的效率高，但准确率是相同的########
 
     # with ThreadPoolExecutor(psutil.cpu_count()) as executor:
     #     executor.map(compareHist, keyList)
