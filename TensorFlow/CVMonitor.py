@@ -71,15 +71,22 @@ class MonitorThread(Thread):
             #对抽出的帧，做缩放，适合同时在一个屏幕中显示这9路视频流。
             reSize = cv2.resize(img, (img_w, img_h), interpolation=cv2.INTER_CUBIC)
 
-            #这里根据分值的不同，显示不同的颜色
-            if(splitString[0].startswith('porn')):
-                cv2.putText(reSize, splitString[0], (30, 60), cv2.FONT_HERSHEY_TRIPLEX, 1, (0, 0, 255), 1)
-            elif(splitString[0].startswith('neutral')):
-                cv2.putText(reSize, splitString[0], (30, 60), cv2.FONT_HERSHEY_TRIPLEX, 1, (255, 0, 0), 1)
-            elif(splitString[0].startswith('sexy')):
-                cv2.putText(reSize, splitString[0], (30, 60), cv2.FONT_HERSHEY_TRIPLEX, 1, (0, 255, 255), 1)
-            else:
-                cv2.putText(reSize, splitString[0], (30, 60), cv2.FONT_HERSHEY_TRIPLEX, 1, (0, 255, 0), 1)
+            score = splitString[0].split('=')[1].strip()
+            print('get score string : ' + score)
+            score = score.split('.')[0]
+
+            print('get score : ' + score)
+
+            if(int(score) > 50):
+                #这里根据分值的不同，显示不同的颜色
+                if(splitString[0].startswith('porn')):
+                    cv2.putText(reSize, splitString[0], (30, 60), cv2.FONT_HERSHEY_TRIPLEX, 1, (0, 0, 255), 1)
+                elif(splitString[0].startswith('neutral')):
+                    cv2.putText(reSize, splitString[0], (30, 60), cv2.FONT_HERSHEY_TRIPLEX, 1, (255, 0, 0), 1)
+                elif(splitString[0].startswith('sexy')):
+                    cv2.putText(reSize, splitString[0], (30, 60), cv2.FONT_HERSHEY_TRIPLEX, 1, (0, 255, 255), 1)
+                else:
+                    cv2.putText(reSize, splitString[0], (30, 60), cv2.FONT_HERSHEY_TRIPLEX, 1, (0, 255, 0), 1)
 
             board_x = (int)(self.args/3)
             board_y = self.args%3
