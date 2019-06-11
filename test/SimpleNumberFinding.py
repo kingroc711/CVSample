@@ -5,7 +5,9 @@ numList = []
 
 
 def main():
-    inputNum = 10023750
+    ################### At here input your number################
+    inputNum = 100
+    ################### At here input your number################
 
     while True:
         if inputNum % 2 == 0:
