@@ -8,8 +8,21 @@ while success:
         break
     cv2.imshow('Test camera', frame)
     success, frame = cameraCapture.read()
-    msec = cameraCapture.get(cv2.CAP_PROP_POS_MSEC)
-    print(msec)
+    milliseconds = cameraCapture.get(cv2.CAP_PROP_POS_MSEC)
+
+    seconds = milliseconds//1000
+    milliseconds = milliseconds%1000
+    minutes = 0
+    hours = 0
+    if seconds >= 60:
+        minutes = seconds//60
+        seconds = seconds % 60
+
+    if minutes >= 60:
+        hours = minutes//60
+        minutes = minutes % 60
+
+    print(int(hours), int(minutes), int(seconds), int(milliseconds))
 
 cv2.destroyAllWindows()
 cameraCapture.release()
