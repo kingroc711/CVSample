@@ -106,7 +106,7 @@ def main():
         return
 
     # 调用OpenCV的接口进行中值滤波
-    opencv = cv2.medianBlur(img, 3)
+    opencv = cv2.medianBlur(img, 5)
 
     # 这里进行图片合并
     img = np.hstack((img, myself))
