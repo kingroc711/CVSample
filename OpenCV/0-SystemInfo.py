@@ -10,3 +10,4 @@ print("name : ", platform.uname())
 print("python vision : ", platform.python_version())
 print("OpenCV Version : ", cv2.__version__)
 print(cv2.getBuildInformation())
+
