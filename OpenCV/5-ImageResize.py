@@ -1,7 +1,7 @@
 import cv2
 
 img = cv2.imread('./res/aero3.jpg')
-print(img.shape[:2])
+print(img.shape)
 
 height, width = img.shape[:2]
 
