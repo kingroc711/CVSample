@@ -69,7 +69,7 @@ def getYellow(img):
     new1[new1 == 1] = 255
     img = new1
     img = cv.medianBlur(new1, 13)
-    img = cv.GaussianBlur(img, (13, 13), 0, 0)
+    img = cv.GaussianBlur(img, (21, 21), 0, 0)
     #img = cv.Canny(img, 30, 80)
     return img
 
