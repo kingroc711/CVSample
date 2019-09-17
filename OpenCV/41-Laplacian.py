@@ -18,10 +18,10 @@ for f in fileList:
 
     grayImag = cv.cvtColor(grayImag, cv.COLOR_GRAY2BGR)
     canny = cv.cvtColor(canny, cv.COLOR_GRAY2BGR)
-    cv.putText(canny, str(value), (0, 40), cv.FONT_HERSHEY_COMPLEX, 1, (0, 0, 255), 1)
+    cv.putText(canny, str(int(value)), (0, 40), cv.FONT_HERSHEY_COMPLEX, 2, (0, 0, 255), 2)
 
     lapla = cv.cvtColor(lapla, cv.COLOR_GRAY2BGR)
-    cv.putText(lapla, str(imageVar), (0, 40), cv.FONT_HERSHEY_COMPLEX, 1, (0, 0, 255), 1)
+    cv.putText(lapla, str(int(imageVar)), (0, 40), cv.FONT_HERSHEY_COMPLEX, 2, (0, 0, 255), 2)
 
     longimag = np.hstack((imag, canny, lapla))
     cv.namedWindow(f, 0)
