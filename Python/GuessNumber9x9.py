@@ -16,14 +16,6 @@ def printMat(mat):
                 print(mat[i, j], end=' ')
     print()
 
-def isMatExistEmpyt(mat):
-    for i in range(H):
-        for j in  range(W):
-            if mat[i, j] == 0:
-                return True
-
-    return False
-
 mainMat = np.zeros((H,W), dtype=np.int8)
 mainMat[0, 1] = 7; mainMat[0, 5] = 5; mainMat[0, 7] = 9
 mainMat[1, 0] = 4; mainMat[1, 5] = 6; mainMat[1, 8] = 7
